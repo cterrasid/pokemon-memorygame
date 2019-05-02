@@ -24,7 +24,6 @@ function paintElements(li, img1, img2, src, imgUrl1, imgUrl2, id, idNumber, clas
   liEl.appendChild(imgPoke);
   liEl.appendChild(imgAdalab);
 
-  liEl.addEventListener('click', handleCardClick);
   //devuelve los elementos dentro de mi ul
   return ul.appendChild(liEl);
 }
@@ -35,9 +34,11 @@ radioBoxEl.forEach(radioBox => {
   radioBox.addEventListener('click', handleRadioBox);
 });
 
-//Manejo los radioBox a traves de su id para obtener su valor, enytre otras cosas
+//Manejo los radioBox a traves de su id
 function handleRadioBox(e) {
+  //Obtengo su valor
   radioBoxValue = e.currentTarget.id;
+  //Condicion para que no se queden todos seleccionados
   for (const radioBox of radioBoxEl) {
     (radioBox.id !== radioBoxValue) ? radioBox.checked = false : radioBox.checked;
   }
@@ -57,15 +58,17 @@ function handleBtnClick() {
       for (const data of result) {
         const dataImgUrl = data.image;
         const dataId = data.pair;
+        //creo los elementos de la API que me interesan
+        const paintEl = paintElements('li', 'img', 'img', 'src', dataImgUrl, imgUrl, 'id', dataId, 'hidden', ulCardsEl);
 
-        paintElements('li', 'img', 'img', 'src', dataImgUrl, imgUrl, 'id', dataId, 'hidden', ulCardsEl);
-
+        //los escucho para poder manejarlos
+        paintEl.addEventListener('click', handleCardClick);
       }
     });
 }
 
 function handleCardClick(e) {
-    e.currentTarget.classList.remove('hidden');
+  e.currentTarget.classList.remove('hidden');
 }
 // const addRemoveClass = (classA, classB, el) => { el.classList.add(classA); el.classList.remove(classB); };
 
