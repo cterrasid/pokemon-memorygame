@@ -17,9 +17,10 @@ function paintElements(li, img1, img2, src, imgUrl1, imgUrl2, id, idNumber, ul) 
   imgPoke.setAttribute(src, imgUrl1);
   imgPoke.setAttribute(id, idNumber);
   imgAdalab.setAttribute(src, imgUrl2);
-  imgPoke.appendChild(liEl);
-  imgAdalab.appendChild(liEl);
-  liEl.appendChild(ul);
+  liEl.appendChild(imgPoke);
+  liEl.appendChild(imgAdalab);
+
+  return ul.appendChild(liEl);
 }
 
 //Escucho mis inputs para poder cambiar la URL segun la conexion
@@ -32,7 +33,7 @@ radioBoxEl.forEach(radioBox => {
 function handleRadioBox(e) {
   radioBoxValue = e.currentTarget.id;
   for (const radioBox of radioBoxEl) {
-    (radioBox.checked) ? false : true;
+    (radioBox.id !== radioBoxValue) ? radioBox.checked = false : radioBox.checked;
   }
 }
 
@@ -48,30 +49,12 @@ function handleBtnClick() {
   //La respuesta en sí, es la siguiente:
     .then(result => {
       //recorro los elementos de la API, que son un array de objetos
-      //FOR
-      for (let i = 0; i < result.length; i++) {
-        const dataImgUrl = result[i].image;
-        const dataId = result[i].pair;
+      //FOR-OF
+      for (const data of result) {
+        const dataImgUrl = data.image;
+        const dataId = data.pair;
 
         paintElements('li', 'img', 'img', 'src', dataImgUrl, imgUrl, 'id', dataId, ulCardsEl);
-
       }
-      //FOR-EACH
-      //   result.forEach(data => {
-      //     const dataImgUrl = data.image;
-      //     const dataId = data.pair;
-
-      //     paintElements('li', 'img', 'img', 'src', dataImgUrl, imgUrl, 'id', dataId, ulCardsEl);
     });
-  //FOR-OF
-  //   for (const data of result) {
-  //     const dataImgUrl = data.image;
-  //     const dataId = data.pair;
-
-  //     paintElements('li', 'img', 'img', 'src', dataImgUrl, imgUrl, 'id', dataId, ulCardsEl);
-
-
-  // }
-  console.log(ulCardsEl);
-
 }
