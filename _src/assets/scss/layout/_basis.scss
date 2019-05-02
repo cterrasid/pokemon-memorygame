@@ -1,0 +1,17 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+img{
+    width: 100px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 25px 2px rgba(128, 128, 128, 0.747);
+    background-position: center center;
+    background-size: cover;
+    overflow: hidden;
+    cursor: pointer;    
+}
