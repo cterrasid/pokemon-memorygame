@@ -46,7 +46,12 @@ function handleRadioInput(e) {
     (radioInput.id !== radioInputValue) ? radioInput.checked = false : radioInput.checked;
   }
   //Condicion para añadir mas cartas si hago otra seleccion: NO SE!!!!
+  //radioInputEl.addEventListener('change', handleRadioInputChange); //LUEGO!!!
+
+  //Listener sobre el radioInputValue para el LS
+  radioInputValue.addEventListener('checked', getRadioInputValueToLs);
 }
+
 
 //Escucho el click del boton "Comenzar"
 btnEl.addEventListener('click', handleBtnClick);
@@ -54,18 +59,18 @@ btnEl.addEventListener('click', handleBtnClick);
 function handleBtnClick() {
   //realizo la petición al servidor
   fetch(`${apiUrl}${radioInputValue}.json`)
-    //Que me responderá en un archivo .json
+  //Que me responderá en un archivo .json
     .then(response => response.json())
-    //La respuesta en sí, es la siguiente:
+  //La respuesta en sí, es la siguiente:
     .then(result => {
-      //recorro los elementos de la API, que son un array de objetos
+    //recorro los elementos de la API, que son un array de objetos
       for (const data of result) {
         const dataImgUrl = data.image;
         const dataId = data.pair;
         //creo los elementos de la API que me interesan
         paintElements('li', 'img', 'img', 'src', dataImgUrl, imgUrl, 'id', dataId, 'hide', 'show', ulCardsEl);
-        //guardo mi seleccion en el Local Storage
-        localStorage.setItem('numberOfCards', JSON.stringify(radioInputValue));
+        //invoco la funcion para guardar el LS
+        getRadioInputValueToLs();
         //Elimino la escucha para que, si me vuelvo loca clickando "Comenzar", no agregue 4536431 tarjetas xD
         btnEl.removeEventListener('click', handleBtnClick);
       }
@@ -90,3 +95,18 @@ function handleCardClick(e) {
     }
   }
 }
+
+function getRadioInputValueToLs() {
+  //guardo mi seleccion en el Local Storage
+  localStorage.setItem('numberOfCards', JSON.stringify(radioInputValue));
+}
+
+document.addEventListener('load', getLocalStorage);
+//Creo una funcion para el local storage
+function getLocalStorage() {
+  JSON.parse(localStorage.getItem('numberOfCards'));
+}
+
+// function paintLocalStorageAfterLoadPage() {
+  
+// }
