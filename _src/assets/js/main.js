@@ -52,18 +52,14 @@ function handleRadioInput(e) {
   radioInputValue.addEventListener('checked', getRadioInputValueToLs);
 }
 
-
-//Escucho el click del boton "Comenzar"
-btnEl.addEventListener('click', handleBtnClick);
-//Cuando haga click en "Comenzar":
-function handleBtnClick() {
+function requestToApi() {
   //realizo la petición al servidor
   fetch(`${apiUrl}${radioInputValue}.json`)
-  //Que me responderá en un archivo .json
+    //Que me responderá en un archivo .json
     .then(response => response.json())
-  //La respuesta en sí, es la siguiente:
+    //La respuesta en sí, es la siguiente:
     .then(result => {
-    //recorro los elementos de la API, que son un array de objetos
+      //recorro los elementos de la API, que son un array de objetos
       for (const data of result) {
         const dataImgUrl = data.image;
         const dataId = data.pair;
@@ -75,6 +71,13 @@ function handleBtnClick() {
         btnEl.removeEventListener('click', handleBtnClick);
       }
     });
+}
+
+//Escucho el click del boton "Comenzar"
+btnEl.addEventListener('click', handleBtnClick);
+//Cuando haga click en "Comenzar":
+function handleBtnClick() {
+  requestToApi();
 }
 
 //Manejo el click sobre las cartas para que se volteen
@@ -104,9 +107,10 @@ function getRadioInputValueToLs() {
 document.addEventListener('load', getLocalStorage);
 //Creo una funcion para el local storage
 function getLocalStorage() {
+  requestToApi();
   JSON.parse(localStorage.getItem('numberOfCards'));
 }
 
 // function paintLocalStorageAfterLoadPage() {
-  
+
 // }
