@@ -25,12 +25,13 @@ function paintElements(li, img1, img2, src, imgUrl1, imgUrl2, id, idNumber, clas
   //incorporo los elementos donde corresponde
   liEl.appendChild(imgPoke);
   liEl.appendChild(imgAdalab);
-
+  //escucho al listado
+  liEl.addEventListener('click', handleCardClick);
   //devuelve los elementos dentro de mi ul
   return ul.appendChild(liEl);
 }
 
-//Escucho mis inputs para poder cambiar la URL segun la conexion
+//Escucho mis inputs para poder cambiar la URL segun la eleccion
 //como estan en el array radioBoxEl, debo añadir el listener con un bucle
 radioBoxEl.forEach(radioBox => {
   radioBox.addEventListener('click', handleRadioBox);
@@ -44,7 +45,7 @@ function handleRadioBox(e) {
   for (const radioBox of radioBoxEl) {
     (radioBox.id !== radioBoxValue) ? radioBox.checked = false : radioBox.checked;
   }
-  //Condicion para añadir mas cartas si hago otra seleccion
+  //Condicion para añadir mas cartas si hago otra seleccion: NO SE!!!!
 }
 
 //Escucho el click del boton "Comenzar"
@@ -62,32 +63,28 @@ function handleBtnClick() {
         const dataImgUrl = data.image;
         const dataId = data.pair;
         //creo los elementos de la API que me interesan
-        const paintEl = paintElements('li', 'img', 'img', 'src', dataImgUrl, imgUrl, 'id', dataId, 'hide', 'show', ulCardsEl);
-
-        //los escucho para poder manejarlos
-        console.log(paintEl.imgAdalab);
-        
-        //paintEl.addEventListener('click', handleCardClick);
+        paintElements('li', 'img', 'img', 'src', dataImgUrl, imgUrl, 'id', dataId, 'hide', 'show', ulCardsEl);
+        //Elimino la escucha para que, si me vuelvo loca clickando "Comenzar", no agregue 4536431 tarjetas xD
+        btnEl.removeEventListener('click', handleBtnClick);
       }
     });
 }
 
+//Manejo el click sobre las cartas para que se volteen
 function handleCardClick(e) {
-  const getId = e.currentTarget.getAttribute('id');
-
-  if (getId.style.display === 'none') {
-    getId.style.display = 'block';
-  } else {
-    getId.style.display = 'none';
+  //Guardo a los hijos de la lista (las imagenes)
+  const cards = e.currentTarget.children;
+  //Itero sobre ellos para establecer una condicion
+  for (const card of cards) {
+    //si el valor de la clase de alguno es 'show'
+    if (card.classList.value === 'show') {
+      //se la quito y le pongo 'hide'
+      card.classList.remove('show');
+      card.classList.add('hide');
+    } else {
+      //si no, se la pongo y quito 'hide'
+      card.classList.add('show');
+      card.classList.remove('hide');
+    }
   }
 }
-
-// //funcion para obtener elementos y cambiar clases
-// function flipCards(el, atr, clasS) {
-//   //obtengo elementos segun un atributo (id)
-//   const getId = el.getAttribute(atr);
-//   const getClass = el.getAttribute(atr);
-//   //añado/remuevo clases
-//     getId.classList.add(clasS);
-  
-// }
