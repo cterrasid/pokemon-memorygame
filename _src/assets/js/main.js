@@ -1,7 +1,7 @@
 'use strict';
 
-const radioBoxEl = document.querySelectorAll('.input__card');
-let radioBoxValue = 0;
+const radioInputEl = document.querySelectorAll('.input__card');
+let radioInputValue = 0;
 
 const btnEl = document.querySelector('.btn__start');
 const ulCardsEl = document.querySelector('.cards__list');
@@ -32,18 +32,18 @@ function paintElements(li, img1, img2, src, imgUrl1, imgUrl2, id, idNumber, clas
 }
 
 //Escucho mis inputs para poder cambiar la URL segun la eleccion
-//como estan en el array radioBoxEl, debo añadir el listener con un bucle
-radioBoxEl.forEach(radioBox => {
-  radioBox.addEventListener('click', handleRadioBox);
+//como estan en el array radioInputEl, debo añadir el listener con un bucle
+radioInputEl.forEach(radioInput => {
+  radioInput.addEventListener('click', handleRadioInput);
 });
 
-//Manejo los radioBox a traves de su id
-function handleRadioBox(e) {
+//Manejo los radioInput a traves de su id
+function handleRadioInput(e) {
   //Obtengo su valor
-  radioBoxValue = e.currentTarget.id;
+  radioInputValue = e.currentTarget.id;
   //Condicion para que no se queden todos seleccionados
-  for (const radioBox of radioBoxEl) {
-    (radioBox.id !== radioBoxValue) ? radioBox.checked = false : radioBox.checked;
+  for (const radioInput of radioInputEl) {
+    (radioInput.id !== radioInputValue) ? radioInput.checked = false : radioInput.checked;
   }
   //Condicion para añadir mas cartas si hago otra seleccion: NO SE!!!!
 }
@@ -53,7 +53,7 @@ btnEl.addEventListener('click', handleBtnClick);
 //Cuando haga click en "Comenzar":
 function handleBtnClick() {
   //realizo la petición al servidor
-  fetch(`${apiUrl}${radioBoxValue}.json`)
+  fetch(`${apiUrl}${radioInputValue}.json`)
     //Que me responderá en un archivo .json
     .then(response => response.json())
     //La respuesta en sí, es la siguiente:
@@ -64,6 +64,8 @@ function handleBtnClick() {
         const dataId = data.pair;
         //creo los elementos de la API que me interesan
         paintElements('li', 'img', 'img', 'src', dataImgUrl, imgUrl, 'id', dataId, 'hide', 'show', ulCardsEl);
+        //guardo mi seleccion en el Local Storage
+        localStorage.setItem('numberOfCards', JSON.stringify(radioInputValue));
         //Elimino la escucha para que, si me vuelvo loca clickando "Comenzar", no agregue 4536431 tarjetas xD
         btnEl.removeEventListener('click', handleBtnClick);
       }
