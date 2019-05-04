@@ -1,7 +1,7 @@
 'use strict';
-
+//CONSTANTES
 const radioInputEl = document.querySelectorAll('.input__card');
-let radioInputValue = 0;
+let radioInputChecked = 0;
 
 const btnEl = document.querySelector('.btn__start');
 const ulCardsEl = document.querySelector('.cards__list');
@@ -9,7 +9,7 @@ const ulCardsEl = document.querySelector('.cards__list');
 const imgUrl = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
 const apiUrl = 'https://raw.githubusercontent.com/Adalab/cards-data/master/';
 
-//Funcion para crear elementos
+//FUNCION PARA CREAR ELEMENTOS
 function paintElements(li, img1, img2, src, imgUrl1, imgUrl2, id, idNumber, class1, class2, ul) {
   //Creo elementos
   const liEl = document.createElement(li);
@@ -26,35 +26,44 @@ function paintElements(li, img1, img2, src, imgUrl1, imgUrl2, id, idNumber, clas
   liEl.appendChild(imgPoke);
   liEl.appendChild(imgAdalab);
   //escucho al listado
-  liEl.addEventListener('click', handleCardClick);
+  liEl.addEventListener('click', flipCardWhenClick);
   //devuelve los elementos dentro de mi ul
   return ul.appendChild(liEl);
 }
 
+//PARTIAL 1: MANEJAR LOS INPUTS
 //Escucho mis inputs para poder cambiar la URL segun la eleccion
 //como estan en el array radioInputEl, debo añadir el listener con un bucle
 radioInputEl.forEach(radioInput => {
-  radioInput.addEventListener('click', handleRadioInput);
+  radioInput.addEventListener('click', handleRadioInputSelection);
 });
 
 //Manejo los radioInput a traves de su id
-function handleRadioInput(e) {
+function handleRadioInputSelection(e) {
   //Obtengo su valor
-  radioInputValue = e.currentTarget.id;
+  radioInputChecked = e.currentTarget.id;
   //Condicion para que no se queden todos seleccionados
   for (const radioInput of radioInputEl) {
-    (radioInput.id !== radioInputValue) ? radioInput.checked = false : radioInput.checked;
-  }
-  //Condicion para añadir mas cartas si hago otra seleccion: NO SE!!!!
-  //radioInputEl.addEventListener('change', handleRadioInputChange); //LUEGO!!!
-
-  //Listener sobre el radioInputValue para el LS
-  radioInputValue.addEventListener('checked', getRadioInputValueToLs);
+    (radioInput.id !== radioInputChecked) ? radioInput.checked = false : radioInput.checked;
+  }  
 }
 
+//PARTIAL 3: INTERACCIONES
+//Escucho el click del boton "Comenzar"
+btnEl.addEventListener('click', handleBtnClick);
+
+//Cuando haga click en "Comenzar":
+function handleBtnClick() {
+  //limpio el listado para que no se repita el contenido
+  ulCardsEl.innerHTML = '';
+  //llamo a la funcion requestToApi para cargar las cartas que elija el usuario
+  requestToApi();
+}
+
+//PARTIAL 2: PETICION
 function requestToApi() {
   //realizo la petición al servidor
-  fetch(`${apiUrl}${radioInputValue}.json`)
+  fetch(`${apiUrl}${radioInputChecked}.json`)
     //Que me responderá en un archivo .json
     .then(response => response.json())
     //La respuesta en sí, es la siguiente:
@@ -66,22 +75,13 @@ function requestToApi() {
         //creo los elementos de la API que me interesan
         paintElements('li', 'img', 'img', 'src', dataImgUrl, imgUrl, 'id', dataId, 'hide', 'show', ulCardsEl);
         //invoco la funcion para guardar el LS
-        getRadioInputValueToLs();
-        //Elimino la escucha para que, si me vuelvo loca clickando "Comenzar", no agregue 4536431 tarjetas xD
-        btnEl.removeEventListener('click', handleBtnClick);
+        getradioInputCheckedToSetLocalStorage();
       }
     });
 }
 
-//Escucho el click del boton "Comenzar"
-btnEl.addEventListener('click', handleBtnClick);
-//Cuando haga click en "Comenzar":
-function handleBtnClick() {
-  requestToApi();
-}
-
 //Manejo el click sobre las cartas para que se volteen
-function handleCardClick(e) {
+function flipCardWhenClick(e) {
   //Guardo a los hijos de la lista (las imagenes)
   const cards = e.currentTarget.children;
   //Itero sobre ellos para establecer una condicion
@@ -99,9 +99,10 @@ function handleCardClick(e) {
   }
 }
 
-function getRadioInputValueToLs() {
+//PARTIAL 4: LOCAL STORAGE
+function getradioInputCheckedToSetLocalStorage() {
   //guardo mi seleccion en el Local Storage
-  localStorage.setItem('numberOfCards', JSON.stringify(radioInputValue));
+  localStorage.setItem('numberOfCards', JSON.stringify(radioInputChecked));
 }
 
 document.addEventListener('load', getLocalStorage);
@@ -110,7 +111,3 @@ function getLocalStorage() {
   requestToApi();
   JSON.parse(localStorage.getItem('numberOfCards'));
 }
-
-// function paintLocalStorageAfterLoadPage() {
-
-// }
