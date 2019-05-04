@@ -45,7 +45,7 @@ function handleRadioInputSelection(e) {
   //Condicion para que no se queden todos seleccionados
   for (const radioInput of radioInputEl) {
     (radioInput.id !== radioInputChecked) ? radioInput.checked = false : radioInput.checked;
-  }  
+  }
 }
 
 //PARTIAL 3: INTERACCIONES
@@ -77,7 +77,7 @@ function requestToApi() {
         //invoco la funcion para guardar el LS
         getradioInputCheckedToSetLocalStorage();
       }
-    });
+    });    
 }
 
 //Manejo el click sobre las cartas para que se volteen
@@ -105,9 +105,11 @@ function getradioInputCheckedToSetLocalStorage() {
   localStorage.setItem('numberOfCards', JSON.stringify(radioInputChecked));
 }
 
-document.addEventListener('load', getLocalStorage);
+document.addEventListener('load', getLocalStorage(), false);
 //Creo una funcion para el local storage
 function getLocalStorage() {
-  requestToApi();
-  JSON.parse(localStorage.getItem('numberOfCards'));
+  if (localStorage.numberOfCards) {
+    radioInputChecked = JSON.parse(localStorage.getItem('numberOfCards'));
+    requestToApi();
+  }
 }
