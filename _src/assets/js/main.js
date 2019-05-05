@@ -1,13 +1,16 @@
 'use strict';
 //CONSTANTES
 const radioInputEl = document.querySelectorAll('.input__card');
-let radioInputChecked = 0;
 
 const btnEl = document.querySelector('.btn__start');
 const ulCardsEl = document.querySelector('.cards__list');
 
 const imgUrl = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
 const apiUrl = 'https://raw.githubusercontent.com/Adalab/cards-data/master/';
+
+//VARIABLES
+let radioInputChecked = 0;
+let pokeCardsId = 0;
 
 //FUNCION PARA CREAR ELEMENTOS
 function paintElements(li, img1, img2, src, imgUrl1, imgUrl2, id, idNumber, class1, class2, ul) {
@@ -27,6 +30,9 @@ function paintElements(li, img1, img2, src, imgUrl1, imgUrl2, id, idNumber, clas
   liEl.appendChild(imgAdalab);
   //escucho al listado
   liEl.addEventListener('click', flipCardWhenClick);
+  liEl.addEventListener('click', compareCardsId);
+  //escucho a la imagen de pokemon para obtener su id
+ // imgPoke.addEventListener('click', compareCardsId);
   //devuelve los elementos dentro de mi ul
   return ul.appendChild(liEl);
 }
@@ -68,8 +74,10 @@ function requestToApi() {
     .then(response => response.json())
     //La respuesta en sí, es la siguiente:
     .then(result => {
+      //barajeo con shuffle
+      const shuffleCards = shuffle(result);
       //recorro los elementos de la API, que son un array de objetos
-      for (const data of result) {
+      for (const data of shuffleCards) {
         const dataImgUrl = data.image;
         const dataId = data.pair;
         //creo los elementos de la API que me interesan
@@ -77,7 +85,7 @@ function requestToApi() {
         //invoco la funcion para guardar el LS
         getradioInputCheckedToSetLocalStorage();
       }
-    });    
+    });
 }
 
 //Manejo el click sobre las cartas para que se volteen
@@ -111,5 +119,29 @@ function getLocalStorage() {
   if (localStorage.numberOfCards) {
     radioInputChecked = JSON.parse(localStorage.getItem('numberOfCards'));
     requestToApi();
+  }
+}
+
+//PARTIAL 5: GAME LOGIC
+//Barajeo de las cartas (Uso el algoritmo de Fisher-Yates (aka Knuth))
+function shuffle(array) {
+  let currentIndex = array.length, temporaryValue, randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+}
+//comparo los id
+function compareCardsId(e) {
+  //recojo el id del primer carajito de la lista
+  pokeCardsId = e.currentTarget.firstChild.id;
+  if (pokeCardsId !== 0) {
+    const valueToCompare = pokeCardsId;
+    console.log(valueToCompare);
   }
 }
