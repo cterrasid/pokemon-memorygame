@@ -1,8 +1,11 @@
 // Core
-// @import 'core/variables';
+@import 'core/variables';
 // @import 'core/functions';
 @import 'core/mixins';
 @import 'layout/basis';
 
 // Layout
+@import 'layout/header';
 @import 'layout/main-game';
+@import 'layout/footer';
+

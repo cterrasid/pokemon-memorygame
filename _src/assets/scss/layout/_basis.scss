@@ -5,10 +5,10 @@
     list-style: none;
 }
 
-img{
-    @include widthAndHeight(100px, 100px);
-    background-color: white;
-    border-radius: 50%;
-    box-shadow: 0 2px 25px 2px #5253534d;
-    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1282.cur), auto !important;
+body{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: $fontContent;
 }
+

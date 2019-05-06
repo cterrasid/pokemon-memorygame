@@ -1,0 +1,16 @@
+header{
+    height: 300px;
+    display: flex;
+    @include flexAlignment(center, center, column);
+    border-bottom: 2px solid black;
+    z-index: 1;
+}
+
+.header__logo{
+    height: 220px;
+    z-index: -1;
+}
+
+.main__title{
+    font-family: $fontTitle;
+}
