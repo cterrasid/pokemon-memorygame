@@ -162,9 +162,10 @@ function compareCardsId(e) {
     //lo comparo con pokeCardsId
     if (valueToCompare !== pokeCardsId) {
     //si son diferentes
-      showCards(firstAdaCard, secondAdaCard, 'show', 'hide');
+    setTimeout(function(){ 
       hideCards(firstPokeCard, secondPokeCard, 'show', 'hide');
-      setTimeout(hideCards, 1000);
+      showCards(firstAdaCard, secondAdaCard, 'show', 'hide');
+     }, 1000);
     }
     pokeCardsId = 0; //volvemos a pones 0 como valor por defecto a pokeCardsId para empezar el proceso de nuevo.
 
