@@ -17,7 +17,13 @@
 	},
 	"js": {
 		"src": [
-			"_src/assets/js/main.js"
+      "_src/assets/js/01-main.js",
+      "_src/assets/js/02-radio-inputs.js",
+      "_src/assets/js/03-start-btn.js",
+      "_src/assets/js/04-api-request.js",
+      "_src/assets/js/05-flip-cards.js",
+      "_src/assets/js/06-local-storage.js",
+			"_src/assets/js/07-game-logic.js"
 		],
 		"dest": "public/assets/js/",
     "dist": "docs/assets/js/"
