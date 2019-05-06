@@ -1,4 +1,3 @@
-//Manejo el click sobre las cartas para que se volteen
 function flipCardWhenClick(e) {
     //Guardo a los hijos de la lista (las imagenes)
     const cards = e.currentTarget.children;

@@ -1,4 +1,3 @@
-//PARTIAL 1: MANEJAR LOS INPUTS
 //Escucho mis inputs para poder cambiar la URL segun la eleccion
 //como estan en el array radioInputEl, debo añadir el listener con un bucle
 radioInputEl.forEach(radioInput => {

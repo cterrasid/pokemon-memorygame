@@ -1,4 +1,3 @@
-//PARTIAL 4: LOCAL STORAGE
 function getradioInputCheckedToSetLocalStorage() {
     //guardo mi seleccion en el Local Storage
     localStorage.setItem('numberOfCards', JSON.stringify(radioInputChecked));

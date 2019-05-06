@@ -1,25 +1,26 @@
 function compareCardsId(e) {
-    let valueToCompare = e.currentTarget.firstChild.id;
+    let secondCardId = e.currentTarget.firstChild.id;
     const secondPokeCard = e.currentTarget.firstChild;
     const secondAdaCard = e.currentTarget.lastChild;
     const firstPokeCard = originalList.firstChild;
     const firstAdaCard = originalList.lastChild;
-    //si el valor de pokeCardsId es diferente de 0 comparamos con el siguiente id
-    if (pokeCardsId !== 0) {
-        //establezco el valor del id dentro de una variable
-        //lo comparo con pokeCardsId
-        if (valueToCompare !== pokeCardsId) {
-            //si son diferentes
+    //si el valor de firstCardId es diferente de 0 lo comparo con el siguiente id
+    if (firstCardId !== 0) {
+        //comparo el valor de la segunda con la primera
+        if (secondCardId !== firstCardId) {
+            //si son diferentes, se voltean, si no, se quedan destapadas
             setTimeout(function () {
                 hideCards(firstPokeCard, secondPokeCard, 'show', 'hide');
                 showCards(firstAdaCard, secondAdaCard, 'show', 'hide');
             }, 1000);
         }
-        pokeCardsId = 0; //volvemos a pones 0 como valor por defecto a pokeCardsId para empezar el proceso de nuevo.
+        //Establezco condicion de inicio
+        firstCardId = 0;
 
-    } else { // si el valor de pokeCardsId es igual a 0, asignamos el valor del id de la prmera carta que se voltea
-        pokeCardsId = e.currentTarget.firstChild.id;
-        originalList = e.currentTarget; ///-------- guardamos el liel al que se le dio click para darle la vuelta si es necesario.
+    } else { 
+        // si el valor de firstCardId es igual a 0, asignamos el valor del id de la prmera carta que se voltea
+        firstCardId = e.currentTarget.firstChild.id;
+        //Guardo el liel al que se le dio click para darle la vuelta si es necesario
+        originalList = e.currentTarget;
     }
-
 }

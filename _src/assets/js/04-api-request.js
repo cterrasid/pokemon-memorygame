@@ -1,4 +1,3 @@
-//PARTIAL 2: PETICION
 function requestToApi() {
     //realizo la petición al servidor
     fetch(`${apiUrl}${radioInputChecked}.json`)

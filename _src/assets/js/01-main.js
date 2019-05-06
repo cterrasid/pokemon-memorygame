@@ -1,5 +1,5 @@
 'use strict';
-//CONSTANTES
+
 const radioInputEl = document.querySelectorAll('.input__card');
 
 const btnEl = document.querySelector('.btn__start');
@@ -7,11 +7,12 @@ const ulCardsEl = document.querySelector('.cards__list');
 
 const imgUrl = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
 const apiUrl = 'https://raw.githubusercontent.com/Adalab/cards-data/master/';
-//VARIABLES
+
 let radioInputChecked = 0;
-let pokeCardsId = 0;
+let firstCardId = 0;
 let originalList = '';
 
+//FUNCION PARA CREAR ELEMENTOS
 function paintElements(li, img1, img2, src, imgUrl1, imgUrl2, id, idNumber, class1, class2, ul) {
   //Creo elementos
   const liEl = document.createElement(li);
@@ -35,21 +36,21 @@ function paintElements(li, img1, img2, src, imgUrl1, imgUrl2, id, idNumber, clas
   //devuelve los elementos dentro de mi ul
   return ul.appendChild(liEl);
 }
-
+//FUNCION PARA MOSTRAR CARTAS
 function showCards(firstEl, secondEl, show, hide) {
   firstEl.classList.add(show);
   firstEl.classList.remove(hide);
   secondEl.classList.add(show);
   secondEl.classList.remove(hide);
 }
-
+//FUNCION PARA OCULTAR CARTAS
 function hideCards(firstEl, secondEl, show, hide) {
   firstEl.classList.remove(show);
   firstEl.classList.add(hide);
   secondEl.classList.add(hide);
   secondEl.classList.remove(show);
 }
-
+//FUNCION PARA BARAJEAR (BUSCADA EN GOOGLE)
 function shuffle(array) {
   let currentIndex = array.length, temporaryValue, randomIndex;
 
