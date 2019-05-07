@@ -11,20 +11,22 @@ let radioInputChecked = 0;
 let firstCardId = 0;
 let originalList = '';
 
-function paintElements(li, img1, img2, src, imgUrl1, imgUrl2, id, idNumber, class1, class2, ul) {
-  const liEl = document.createElement(li);
-  const imgPoke = document.createElement(img1);
-  const imgAdalab = document.createElement(img2);
+function paintElements(imgUrl1, imgUrl2, idNumber, class1, class2, ul) {
+  const liEl = document.createElement('li');
+  const imgPoke = document.createElement('img');
+  const imgBack = document.createElement('img');
 
-  imgPoke.setAttribute(src, imgUrl1);
-  imgPoke.setAttribute(id, idNumber);
+  imgPoke.setAttribute('src', imgUrl1);
+  imgPoke.setAttribute('id', idNumber);
+  imgPoke.setAttribute('alt', 'Pokemon card');
   imgPoke.classList.add(class1);
-  imgAdalab.setAttribute(src, imgUrl2);
-  imgAdalab.setAttribute(id, idNumber);
-  imgAdalab.classList.add(class2);
+  imgBack.setAttribute('src', imgUrl2);
+  imgBack.setAttribute('id', idNumber);
+  imgBack.setAttribute('alt', 'Back card');
+  imgBack.classList.add(class2);
 
   liEl.appendChild(imgPoke);
-  liEl.appendChild(imgAdalab);
+  liEl.appendChild(imgBack);
 
   liEl.addEventListener('click', flipCardWhenClick);
   liEl.addEventListener('click', compareCardsId);

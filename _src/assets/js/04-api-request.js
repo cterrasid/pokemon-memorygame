@@ -6,7 +6,7 @@ function requestToApi() {
             for (const data of shuffleCards) {
                 const dataImgUrl = data.image;
                 const dataId = data.pair;
-                paintElements('li', 'img', 'img', 'src', dataImgUrl, imgUrl, 'id', dataId, 'hide', 'show', ulCardsEl);
+                paintElements(dataImgUrl, imgUrl, dataId, 'hide', 'show', ulCardsEl);
                 getradioInputCheckedToSetLocalStorage();
             }
         });
