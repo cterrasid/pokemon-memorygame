@@ -11,7 +11,7 @@ let radioInputChecked = 0;
 let firstCardId = 0;
 let originalList = '';
 
-function paintElements(imgUrl1, imgUrl2, idNumber, class1, class2, ul) {
+function paintElements(imgUrl1, imgUrl2, idNumber, ul) {
   const liEl = document.createElement('li');
   const imgPoke = document.createElement('img');
   const imgBack = document.createElement('img');
@@ -19,11 +19,11 @@ function paintElements(imgUrl1, imgUrl2, idNumber, class1, class2, ul) {
   imgPoke.setAttribute('src', imgUrl1);
   imgPoke.setAttribute('id', idNumber);
   imgPoke.setAttribute('alt', 'Pokemon card');
-  imgPoke.classList.add(class1);
+  imgPoke.classList.add('hide');
   imgBack.setAttribute('src', imgUrl2);
   imgBack.setAttribute('id', idNumber);
   imgBack.setAttribute('alt', 'Back card');
-  imgBack.classList.add(class2);
+  imgBack.classList.add('show');
 
   liEl.appendChild(imgPoke);
   liEl.appendChild(imgBack);
