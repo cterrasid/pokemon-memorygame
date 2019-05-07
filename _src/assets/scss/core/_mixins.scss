@@ -3,8 +3,34 @@
     height: $height;
 }
 
-@mixin flexAlignment($justify-content, $align-items, $flex-direction) {
-    justify-content: $justify-content;
+@mixin gridContainer($display, $gridTempCol, $gridTempRw, $gridTempAr) {
+    display: $display;
+    grid-template-columns: $gridTempCol;
+    grid-template-rows: $gridTempRw;
+    grid-template-areas: $gridTempAr;
+}
+
+@mixin gridBoxAlignment($justify-items, $align-items) {
+    justify-items: $justify-items;
     align-items: $align-items;
-    flex-direction: $flex-direction;
+}
+
+@mixin flexContainer($display, $justifyContent, $alignItems, $flexDirection) {
+    display: $display;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+    flex-direction: $flexDirection;
+}
+
+@mixin btn {
+    display: inline-block;
+    height: 30px;
+    width: 70px;
+    background-color: $whiteVanillite;
+    border-bottom: 3px solid $blackUmbreon !important;
+    border: none;
+    font-size: $fontSizeM;
+    font-family: $fontAlt;
+    text-align: center;
+    margin: 20px 0 20px 0;
 }

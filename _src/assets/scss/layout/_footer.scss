@@ -1,0 +1,9 @@
+footer{
+    grid-area: footer;
+    font-family: $fontTitle;
+    font-size: $fontSizeXS;
+    background-color: $magentaDitto;
+    @include widthAndHeight(100%, 70px);
+    @include flexContainer(flex, center, center, unset);
+
+}

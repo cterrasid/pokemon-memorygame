@@ -1,13 +1,13 @@
 //Font Family
 $fontTitle: 'Permanent Marker', cursive;
-$fontAlternative: 'Bungee Shade', cursive;
-$fontContent: 'Montserrat', sans-serif;
+$fontContent: 'Hammersmith One', sans-serif;
+$fontAlt: 'Allerta Stencil', sans-serif;
 
 //Font Size
-$defaultFontSize: 16;
-$fontSizeS:rem(18);
-$fontSizeM:rem(24);
-$fontSizeL:rem(32);
+$fontSizeXS: 16px;
+$fontSizeS: 18px;
+$fontSizeM: 24px;
+$fontSizeL: 32px;
 
 //Font Weight
 $fontWeightS:300;
@@ -16,3 +16,5 @@ $fontWeightM:400;
 //Colors
 $whiteVanillite: #ffffff;
 $grayMinccino: #5253534d;
+$blackUmbreon: #000000;
+$magentaDitto: #f53886;

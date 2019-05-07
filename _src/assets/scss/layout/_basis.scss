@@ -6,8 +6,9 @@
 }
 
 body{
+    @include gridContainer(grid, 100vw, 175px 1fr 50px, 'header' 'main' 'footer');
+    @include gridBoxAlignment(center, center);
     height: 100vh;
-    width: 100vw;
     overflow: hidden;
     font-family: $fontContent;
 }

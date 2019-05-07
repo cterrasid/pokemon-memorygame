@@ -1,6 +1,15 @@
 .page__main{
+    grid-area: main;
+    @include gridContainer(grid, 300px 300px 90px, 60px 150px 150px, 'choose options button' 'cards cards cards' 'cards cards cards');
+    @include gridBoxAlignment(center, center);
     width: 100%;
-   
+    padding-left: 25%;
+}
+
+.choose{
+    grid-area: choose;
+    font-family: $fontTitle;
+    font-size: $fontSizeS;
 }
 
 .show{
@@ -8,6 +17,7 @@
     background-color: $whiteVanillite;
     border-radius: 50%;
     box-shadow: 0 2px 25px 2px $grayMinccino;
+    margin-right: 20px;
     cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1282.cur), auto !important;
 }
 
@@ -16,13 +26,18 @@
 }
 
 .radio__input{
-    display: block;
+    grid-area: options;
+    @include flexContainer(flex, flex-start, start, column);
 }
 
 .btn__start{
-    display: block;
+    grid-area: button;
+    @include btn;
 }
 
 .cards__list{
-    display: flex;
+    grid-area: cards;
+    @include flexContainer(flex, center, center, row);
+    flex-wrap: wrap;
+    padding: 0 10% 0 10%;
 }

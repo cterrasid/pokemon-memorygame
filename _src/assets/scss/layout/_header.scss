@@ -1,16 +1,20 @@
 header{
-    height: 300px;
-    display: flex;
-    @include flexAlignment(center, center, column);
-    border-bottom: 2px solid black;
+    @include gridContainer(grid, 100%, 120px 65px, 'logo' 'title');
+    @include gridBoxAlignment(center, center);
+    @include widthAndHeight(100%, auto);
+    grid-area: header;
+    border-bottom: 5px solid $blackUmbreon;
     z-index: 1;
 }
 
 .header__logo{
+    grid-area: logo;
     height: 220px;
     z-index: -1;
 }
 
 .main__title{
+    grid-area: title;
     font-family: $fontTitle;
+    font-size: $fontSizeL;
 }

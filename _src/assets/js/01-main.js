@@ -4,7 +4,7 @@ const radioInputEl = document.querySelectorAll('.input__card');
 const btnEl = document.querySelector('.btn__start');
 const ulCardsEl = document.querySelector('.cards__list');
 
-const imgUrl = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
+const imgUrl = 'https://image.flaticon.com/icons/svg/914/914726.svg';
 const apiUrl = 'https://raw.githubusercontent.com/Adalab/cards-data/master/';
 
 let radioInputChecked = 0;
